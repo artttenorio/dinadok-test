@@ -18,7 +18,6 @@ describe("ClientService", () => {
 
     service = new ClientService(mockCache);
 
-    // Reset all mocks before each test
     jest.clearAllMocks();
   });
 
@@ -30,8 +29,9 @@ describe("ClientService", () => {
     };
     const createdClient = { _id: "1", ...clientData } as any;
 
-    // Mock do ClientModel.create
-    jest.spyOn(ClientModule.ClientModel, "create").mockResolvedValue(createdClient);
+    jest
+      .spyOn(ClientModule.ClientModel, "create")
+      .mockResolvedValue(createdClient);
 
     const result = await service.createClient(clientData as any);
 
@@ -49,13 +49,19 @@ describe("ClientService", () => {
       telefone: "11999999999",
     } as any;
 
-    jest.spyOn(ClientModule.ClientModel, "findByIdAndUpdate").mockResolvedValue(updatedClient);
+    jest
+      .spyOn(ClientModule.ClientModel, "findByIdAndUpdate")
+      .mockResolvedValue(updatedClient);
 
     const result = await service.updateClient(id, updateData);
 
-    expect(ClientModule.ClientModel.findByIdAndUpdate).toHaveBeenCalledWith(id, updateData, {
-      new: true,
-    });
+    expect(ClientModule.ClientModel.findByIdAndUpdate).toHaveBeenCalledWith(
+      id,
+      updateData,
+      {
+        new: true,
+      }
+    );
     expect(mockCache.set).toHaveBeenCalledWith(`client:${id}`, updatedClient);
     expect(result).toEqual(updatedClient);
   });
@@ -87,7 +93,9 @@ describe("ClientService", () => {
     } as any;
 
     (mockCache.get as jest.Mock).mockResolvedValue(null);
-    jest.spyOn(ClientModule.ClientModel, "findById").mockResolvedValue(dbClient);
+    jest
+      .spyOn(ClientModule.ClientModel, "findById")
+      .mockResolvedValue(dbClient);
 
     const result = await service.getClientById(id);
 

@@ -70,8 +70,8 @@ Serviços:
 
 - Frontend → http://localhost:5173
 - Backend → http://localhost:3000
-- MongoDB → mongodb://mongo:27017
-- Redis → redis://redis:6379
+- MongoDB
+- Redis
 - RabbitMQ UI → http://localhost:15672 (guest/guest)
 
 ## 📡 Endpoints
@@ -99,6 +99,24 @@ Cria um novo cliente.
 3. Publica mensagem `CLIENTE_CRIADO` no RabbitMQ
 4. Consumer processa a mensagem
 5. Frontend atualiza a lista em tempo real
+
+- Para utilizar a rota de filtrar cliente por id, faça uma requisição utilizando o postman, o retorno sera um json assim:
+
+```json
+{
+  "_id": "6908b709fe3e6c29cdbf2d5c",
+  "nome": "AIRTON COSTA TENORIO",
+  "email": "arthurtenorio44440101@gmail.com",
+  "telefone": "459982654444444",
+  "createdAt": "2025-11-03T14:07:05.783Z",
+  "updatedAt": "2025-11-03T14:07:11.450Z",
+  "__v": 0
+}
+```
+
+Utilize o campo id na seguinte rota
+
+http://localhost:3000/clients/6908b709fe3e6c29cdbf2d5c - Para receber a informação do usuário pesquisando por ID
 
 ## 🧠 Funcionalidades
 
@@ -138,6 +156,10 @@ npm run preview  # Visualiza build
 - RabbitMQ UI: [http://localhost:15672](http://localhost:15672)
 - Logs Backend: `docker logs client-dinadok`
 - Console Frontend: F12 → aba “Console”
+
+## ⚡ Desempenho
+
+- npm run test - Para rodar o teste dos serviços de criação de user
 
 ## ⚡ Desempenho
 
